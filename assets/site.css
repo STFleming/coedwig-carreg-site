@@ -1,0 +1,709 @@
+/* ---------- OSR typography theme ---------- */
+
+:root {
+  --paper: #f5ecd7;
+  --paper-dim: #ebe0c4;
+  --ink: #2a1f14;
+  --ink-soft: #5c4a35;
+  --ink-muted: #7a6648;
+  --rule: #8b2e2e;
+  --rule-dark: #621f1f;
+  --border: #a89873;
+  --border-soft: #c7b992;
+  --accent-green: #3a5a30;
+  --accent-blue: #2a4a6a;
+  --text-col: min(86ch, 100%);
+  --wide-col: min(1500px, 100%);
+  --sidebar-w: 280px;
+}
+
+@font-face {
+  font-family: "IM Fell English";
+  src: local("IM Fell English"),
+       url("/assets/fonts/IMFellEnglish-Regular.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 400;
+}
+@font-face {
+  font-family: "IM Fell English";
+  src: local("IM Fell English Italic"),
+       url("/assets/fonts/IMFellEnglish-Italic.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: "IM Fell English SC";
+  src: local("IM Fell English SC"),
+       url("/assets/fonts/IMFellEnglishSC-Regular.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Crimson Text";
+  src: local("Crimson Text"),
+       url("/assets/fonts/CrimsonText-Regular.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Crimson Text";
+  src: local("Crimson Text Italic"),
+       url("/assets/fonts/CrimsonText-Italic.woff2") format("woff2");
+  font-display: swap;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Crimson Text";
+  src: local("Crimson Text Bold"),
+       url("/assets/fonts/CrimsonText-Bold.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 700;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Crimson Text", "Linux Libertine", Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+a {
+  color: var(--rule);
+  text-decoration: none;
+}
+a:hover, a:focus { text-decoration: underline; }
+
+/* ---------- Layout ---------- */
+
+.site-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: var(--sidebar-w);
+  flex: 0 0 var(--sidebar-w);
+  border-right: 1px solid var(--border);
+  background: var(--paper-dim);
+  overflow-y: auto;
+  max-height: 100vh;
+  position: sticky;
+  top: 0;
+  padding: 1.4rem 1rem 2rem;
+}
+
+.sidebar-header {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+.site-title {
+  font-family: "IM Fell English SC", "IM Fell English", "Cinzel", Georgia, serif;
+  font-size: 1.3rem;
+  color: var(--ink);
+  letter-spacing: 0.03em;
+}
+.site-title:hover { text-decoration: none; color: var(--rule); }
+
+.sidebar-nav { font-size: 0.92rem; }
+.tree, .tree ul {
+  list-style: none;
+  padding-left: 0.9rem;
+  margin: 0;
+}
+.tree > li { list-style: none; }
+.tree-item { padding: 1px 0; }
+.tree-item > a {
+  color: var(--ink-soft);
+  display: inline-block;
+  padding: 1px 0;
+}
+.tree-item > a:hover { color: var(--rule); }
+.tree-item > a.pdf-link::before {
+  content: "\1F4D6"; /* 📖 */
+  font-size: 0.85em;
+  margin-right: 0.35em;
+  opacity: 0.7;
+}
+.tree-group {
+  color: var(--ink-muted);
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+  font-size: 0.88em;
+}
+.tree-branch > details > summary > .tree-group {
+  color: var(--ink);
+}
+
+/* Collapsible folder sections */
+.tree-branch > details > summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: baseline;
+  gap: 0.35em;
+  padding: 1px 0;
+  user-select: none;
+}
+.tree-branch > details > summary::-webkit-details-marker { display: none; }
+.tree-branch > details > summary::before {
+  content: "\25B8"; /* ▸ right-pointing small triangle */
+  color: var(--ink-muted);
+  font-size: 0.8em;
+  transition: transform 120ms ease;
+  display: inline-block;
+  flex-shrink: 0;
+  width: 0.8em;
+  text-align: center;
+}
+.tree-branch > details[open] > summary::before {
+  transform: rotate(90deg);
+}
+.tree-branch > details > summary:hover::before {
+  color: var(--rule);
+}
+.tree-branch > details > summary > a,
+.tree-branch > details > summary > .tree-group {
+  flex: 1;
+}
+
+.content {
+  flex: 1;
+  padding: 1.8rem clamp(1rem, 3vw, 3rem) 4rem;
+  min-width: 0;
+  max-width: var(--wide-col);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.note {
+  margin: 0 auto;
+  max-width: var(--wide-col);
+}
+
+.note-body { max-width: 100%; }
+
+/* Center the note header (h1) in the text column */
+.note-header {
+  max-width: var(--text-col);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Text children are capped to readable width */
+.note-body > p,
+.note-body > ul,
+.note-body > ol,
+.note-body > dl,
+.note-body > blockquote,
+.note-body > h1,
+.note-body > h2,
+.note-body > h3,
+.note-body > h4,
+.note-body > h5,
+.note-body > h6,
+.note-body > hr,
+.note-body > pre,
+.note-body > aside.statblock,
+.home-body > p,
+.home-body > ul,
+.home-body > ol {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: var(--text-col);
+}
+
+/* Wide media fills the full content column */
+.note-body > .leaflet-wrap,
+.note-body > figure,
+.note-body > table,
+.note-body > img,
+.home-body > .leaflet-wrap {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: var(--wide-col);
+}
+
+.breadcrumbs {
+  max-width: var(--text-col);
+  margin: 0 auto 1.2rem;
+  color: var(--ink-muted);
+  font-size: 0.92rem;
+}
+.breadcrumbs a { color: var(--ink-muted); }
+.breadcrumbs a:hover { color: var(--rule); }
+.bc-sep { margin: 0 0.4em; color: var(--border); }
+
+/* ---------- Typography ---------- */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "IM Fell English SC", "IM Fell English", "Cinzel", Georgia, serif;
+  color: var(--ink);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  margin: 1.6em 0 0.5em;
+}
+h1 {
+  font-size: 2.2rem;
+  line-height: 1.15;
+  padding-bottom: 0.25em;
+  border-bottom: 2px solid var(--rule);
+  margin-top: 0;
+}
+h2 {
+  font-size: 1.55rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.15em;
+}
+h3 { font-size: 1.25rem; color: var(--rule-dark); }
+h4 { font-size: 1.08rem; font-variant: small-caps; letter-spacing: 0.05em; }
+
+.heading-anchor {
+  color: var(--border);
+  text-decoration: none;
+  margin-left: 0.35em;
+  opacity: 0;
+  transition: opacity 120ms ease;
+  font-size: 0.8em;
+}
+h1:hover .heading-anchor,
+h2:hover .heading-anchor,
+h3:hover .heading-anchor,
+h4:hover .heading-anchor,
+h5:hover .heading-anchor,
+h6:hover .heading-anchor { opacity: 1; }
+
+p, ul, ol { margin: 0.6em 0; }
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2em 0;
+}
+
+blockquote {
+  border-left: 3px solid var(--border);
+  color: var(--ink-soft);
+  margin: 1em 0;
+  padding: 0.2em 0 0.2em 1em;
+  font-style: italic;
+}
+
+blockquote.transclusion {
+  border-left: 3px double var(--rule);
+  background: var(--paper-dim);
+  padding: 0.8em 1.2em;
+  font-style: normal;
+}
+.transclusion-title {
+  font-variant: small-caps;
+  letter-spacing: 0.05em;
+  color: var(--ink-muted);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0.6em;
+  padding-bottom: 0.2em;
+}
+
+code {
+  background: var(--paper-dim);
+  padding: 0.1em 0.3em;
+  border: 1px solid var(--border-soft);
+  font-family: "Courier New", monospace;
+  font-size: 0.9em;
+}
+pre {
+  background: var(--paper-dim);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--ink-muted);
+  padding: 0.8em;
+  overflow-x: auto;
+}
+pre code { background: transparent; border: none; padding: 0; }
+
+/* ---------- Tables ---------- */
+
+table {
+  border-collapse: collapse;
+  margin: 1.2em 0;
+  width: 100%;
+  max-width: 100%;
+  background: var(--paper-dim);
+  border-top: 3px double var(--ink);
+  border-bottom: 3px double var(--ink);
+}
+th, td {
+  padding: 0.45em 0.7em;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border-soft);
+}
+th {
+  font-family: "IM Fell English SC", "IM Fell English", Georgia, serif;
+  font-weight: normal;
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+tbody tr:last-child td { border-bottom: none; }
+
+/* Dice tables use the same style but with a narrow first column */
+table th:first-child, table td:first-child {
+  text-align: center;
+  white-space: nowrap;
+  color: var(--rule-dark);
+  font-family: "IM Fell English", Georgia, serif;
+  width: 4.5em;
+}
+
+/* ---------- Statblock ---------- */
+
+aside.statblock {
+  background: var(--paper-dim);
+  border-top: 4px double var(--ink);
+  border-bottom: 4px double var(--ink);
+  padding: 1em 1.2em;
+  margin: 1.2em 0;
+  font-size: 0.96em;
+}
+.stat-name {
+  font-family: "IM Fell English SC", Georgia, serif;
+  font-size: 1.4em;
+  color: var(--rule-dark);
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 0.3em;
+  padding-bottom: 0.15em;
+}
+.stat-meta {
+  font-style: italic;
+  color: var(--ink-muted);
+  margin-bottom: 0.5em;
+}
+.stat-header {
+  border-bottom: 1px solid var(--border);
+  padding: 0.2em 0;
+  margin-bottom: 0.4em;
+}
+.stat-header .hd { color: var(--ink-muted); }
+.stat-saves {
+  display: flex;
+  gap: 0.8em;
+  flex-wrap: wrap;
+  margin: 0.4em 0;
+  padding: 0.2em 0 0.4em;
+  border-bottom: 1px solid var(--border-soft);
+}
+.save-cell {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.25em;
+}
+.save-label {
+  font-family: "IM Fell English SC", Georgia, serif;
+  color: var(--ink-muted);
+  font-size: 0.9em;
+}
+.save-val {
+  font-weight: bold;
+  color: var(--ink);
+}
+.stat-line { margin: 0.15em 0; }
+.stat-label {
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+  color: var(--ink-muted);
+  margin-right: 0.3em;
+}
+.stat-section {
+  margin-top: 0.6em;
+  padding-top: 0.3em;
+  border-top: 1px solid var(--border-soft);
+}
+.stat-section-title {
+  font-family: "IM Fell English SC", Georgia, serif;
+  font-variant: small-caps;
+  color: var(--rule-dark);
+  font-size: 1em;
+  margin: 0 0 0.3em;
+  border: none;
+}
+.stat-action { margin: 0.3em 0; }
+.stat-action-name {
+  font-style: italic;
+  color: var(--ink);
+  font-weight: bold;
+}
+
+/* ---------- Leaflet map wrap ---------- */
+
+.leaflet-wrap {
+  margin: 1.2em auto;
+  max-width: var(--wide-col);
+  width: 100%;
+}
+.leaflet-map {
+  border: 1px solid var(--ink-muted);
+  background: var(--paper-dim);
+  width: 100% !important;
+  max-width: 100% !important;
+  /* Cap the inline pixel height to a fraction of the viewport so the map
+     scales on small screens and doesn't dominate on tall ones. */
+  max-height: 85vh;
+  min-height: 50vh;
+}
+.leaflet-full-bleed .leaflet-map {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 78vh;
+}
+.leaflet-missing {
+  background: var(--paper-dim);
+  border: 1px dashed var(--rule);
+  padding: 1em;
+  color: var(--rule-dark);
+  font-style: italic;
+}
+
+/* OSR-styled map pins */
+.osr-pin {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "IM Fell English SC", Georgia, serif;
+  font-weight: bold;
+  font-size: 14px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+  cursor: pointer;
+  line-height: 1;
+}
+.osr-pin.osr-pin-unlinked {
+  cursor: default;
+  opacity: 0.75;
+}
+.osr-pin-glyph { pointer-events: none; }
+
+.leaflet-tooltip.osr-tooltip {
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  font-family: "Crimson Text", Georgia, serif;
+  font-size: 0.95em;
+  padding: 0.2em 0.5em;
+  box-shadow: none;
+}
+.leaflet-tooltip.osr-tooltip::before { border: none; }
+
+/* ---------- Home ---------- */
+
+.home-page .content { padding: 1rem 1.2rem 2rem; }
+.home-hero {
+  text-align: center;
+  padding: 1rem 0 0.5rem;
+  border-bottom: 2px double var(--rule);
+  margin-bottom: 1rem;
+}
+.home-title {
+  font-family: "IM Fell English SC", Georgia, serif;
+  font-size: 2.8rem;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+.home-subtitle {
+  font-style: italic;
+  color: var(--ink-muted);
+  margin: 0.2em 0 0.6em;
+}
+.home-body .leaflet-map { min-height: 78vh; }
+.home-link {
+  text-align: center;
+  color: var(--ink-muted);
+  margin-top: 1em;
+}
+
+/* ---------- Two-column NPC / location layout ---------- */
+
+.npc-layout {
+  display: grid;
+  grid-template-columns: 1fr minmax(220px, 32%);
+  gap: 1.6em;
+  margin: 1em 0;
+  align-items: start;
+}
+.npc-layout-text > *:first-child { margin-top: 0; }
+.npc-layout-text > p,
+.npc-layout-text > ul,
+.npc-layout-text > ol,
+.npc-layout-text > blockquote,
+.npc-layout-text > h1,
+.npc-layout-text > h2,
+.npc-layout-text > h3,
+.npc-layout-text > h4 {
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+}
+.npc-layout-img { grid-column: 2; grid-row: 1; }
+.npc-layout-img img,
+.npc-layout-img > p img {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  border: 1px solid var(--border);
+}
+.npc-layout-img > p { margin: 0; }
+
+@media (max-width: 720px) {
+  .npc-layout { grid-template-columns: 1fr; }
+  .npc-layout-img { grid-column: 1; grid-row: auto; }
+}
+
+/* ---------- Folder index ---------- */
+
+.folder-children {
+  list-style: none;
+  padding-left: 0;
+  margin: 1em 0;
+}
+.folder-child {
+  padding: 0.6em 0;
+  border-bottom: 1px solid var(--border-soft);
+}
+.folder-child:last-child { border-bottom: none; }
+.folder-child > a,
+.folder-child > span {
+  font-family: "IM Fell English SC", Georgia, serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.03em;
+}
+.folder-child-folder > a::before { content: "▸ "; color: var(--ink-muted); }
+.folder-child-pdf > a::before { content: "📖 "; opacity: 0.7; font-size: 0.9em; }
+.folder-child-excerpt {
+  margin: 0.2em 0 0;
+  color: var(--ink-soft);
+  font-style: italic;
+  font-size: 0.92rem;
+}
+.folder-empty { color: var(--ink-muted); }
+
+/* ---------- Backlinks ---------- */
+
+.backlinks {
+  max-width: var(--text-col);
+  margin: 3em auto 0;
+  border-top: 2px double var(--rule);
+  padding-top: 1em;
+}
+.backlinks h2 {
+  font-size: 1.15rem;
+  border: none;
+  margin: 0 0 0.4em;
+  color: var(--ink-muted);
+  font-variant: small-caps;
+  letter-spacing: 0.05em;
+}
+.backlinks ul {
+  list-style: none;
+  padding-left: 0;
+  columns: 2;
+  column-gap: 2em;
+}
+.backlinks li {
+  padding: 0.1em 0;
+  break-inside: avoid;
+}
+
+/* ---------- Images ---------- */
+
+img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+}
+.note-body img { margin: 0.5em 0; }
+
+/* ---------- Link preview tooltip ---------- */
+
+.link-preview {
+  position: fixed;
+  z-index: 1000;
+  max-width: 340px;
+  min-width: 220px;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.12);
+  padding: 0.7em 0.9em;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: var(--ink);
+  opacity: 0;
+  transition: opacity 120ms ease;
+  pointer-events: none;
+}
+.link-preview.visible { opacity: 1; }
+.link-preview-title {
+  font-family: "IM Fell English SC", "IM Fell English", Georgia, serif;
+  font-size: 1.02rem;
+  color: var(--rule-dark);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.25em;
+  margin-bottom: 0.4em;
+  letter-spacing: 0.03em;
+}
+.link-preview-thumb {
+  margin: 0 0 0.4em;
+  display: flex;
+  justify-content: center;
+}
+.link-preview-thumb img {
+  max-width: 100%;
+  max-height: 120px;
+  border: 1px solid var(--border);
+  display: block;
+}
+.link-preview-excerpt {
+  color: var(--ink-soft);
+  font-style: italic;
+  overflow: hidden;
+}
+
+/* Embedded PDFs (`![[file.pdf]]`) */
+.pdf-embed {
+  width: 100%;
+  height: 85vh;
+  border: 1px solid var(--ink-muted);
+  background: var(--paper-dim);
+  margin: 1.2em auto;
+  max-width: var(--wide-col);
+}
+.pdf-embed object { display: block; border: none; }
+.note-body > .pdf-embed {
+  max-width: var(--wide-col);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 900px) {
+  .site-shell { flex-direction: column; }
+  .sidebar {
+    width: 100%;
+    max-height: none;
+    position: static;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .content { padding: 1rem 1rem 3rem; }
+}
