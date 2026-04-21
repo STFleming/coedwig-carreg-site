@@ -669,6 +669,15 @@ aside.statblock {
   margin-right: 0.15em;
   display: inline-block;
 }
+.cal-cell-moon {
+  position: absolute;
+  bottom: 0.25em;
+  right: 0.4em;
+  line-height: 1;
+  opacity: 0.85;
+}
+.cal-moon-glyph { font-size: 1.1em; }
+.cal-cell { position: relative; }
 .cal-cell-events,
 .cal-cell-feasts,
 .cal-cell-sessions,
