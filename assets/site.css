@@ -664,6 +664,11 @@ aside.statblock {
   font-style: italic;
   margin-bottom: 0.2em;
 }
+.cal-icon {
+  font-style: normal;
+  margin-right: 0.15em;
+  display: inline-block;
+}
 .cal-cell-events,
 .cal-cell-feasts,
 .cal-cell-sessions,
