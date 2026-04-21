@@ -679,12 +679,7 @@ aside.statblock {
   align-items: baseline;
   gap: 0.3em;
 }
-.cal-cell-moon-major {
-  left: 0.4em;
-  right: 0.4em;
-  justify-content: center;
-  opacity: 1;
-}
+.cal-cell-moon-major { opacity: 1; }
 .cal-moon-glyph { font-size: 1.1em; }
 .cal-moon-label {
   font-family: "IM Fell English SC", Georgia, serif;
