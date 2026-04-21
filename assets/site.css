@@ -606,12 +606,13 @@ aside.statblock {
 .cal-cell {
   background: var(--paper);
   padding: 0.45em 0.55em;
-  min-height: 7.5em;
+  aspect-ratio: 1 / 1;
   position: relative;
-  font-size: 0.88rem;
-  line-height: 1.35;
+  font-size: 0.82rem;
+  line-height: 1.3;
   overflow: hidden;
 }
+.cal-cell-blank { aspect-ratio: 1 / 1; }
 .cal-cell-blank { background: var(--paper-dim); }
 .cal-cell-head {
   display: flex;
@@ -658,7 +659,7 @@ aside.statblock {
 @media (max-width: 720px) {
   .cal-grid { grid-template-columns: repeat(1, 1fr); }
   .cal-weekday { display: none; }
-  .cal-cell { min-height: 0; padding: 0.6em 0.8em; }
+  .cal-cell { aspect-ratio: auto; padding: 0.6em 0.8em; }
   .cal-cell-blank { display: none; }
 }
 
