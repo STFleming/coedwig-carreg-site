@@ -635,6 +635,29 @@ aside.statblock {
   font-size: 0.85em;
 }
 .cal-has-entry { background: #fbf5e2; }
+.cal-past { opacity: 0.78; }
+.cal-future .cal-cell-date { color: var(--ink-muted); }
+.cal-today {
+  box-shadow: inset 0 0 0 3px var(--rule);
+  background: #fcefd4;
+  position: relative;
+}
+.cal-today::after {
+  content: "Today";
+  position: absolute;
+  top: 0.3em;
+  right: 0.3em;
+  font-family: "IM Fell English SC", Georgia, serif;
+  font-variant: small-caps;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: var(--rule-dark);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  padding: 1px 5px;
+  pointer-events: none;
+}
+.cal-today .cal-cell-date { color: var(--rule-dark); font-weight: bold; }
 .cal-cell-weather {
   color: var(--ink-soft);
   font-style: italic;
