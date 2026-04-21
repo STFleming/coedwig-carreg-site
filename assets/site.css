@@ -571,6 +571,50 @@ aside.statblock {
   .npc-layout-img { grid-column: 1; grid-row: auto; }
 }
 
+/* ---------- Calendar view ---------- */
+
+.calendar-view {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1em;
+  margin: 1.2em 0;
+}
+.cal-day {
+  background: var(--paper-dim);
+  border-top: 3px double var(--ink);
+  border-bottom: 3px double var(--ink);
+  padding: 0.7em 0.9em;
+  font-size: 0.95rem;
+}
+.cal-date {
+  font-family: "IM Fell English SC", Georgia, serif;
+  font-variant: small-caps;
+  font-size: 1.1rem;
+  color: var(--rule-dark);
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0.4em;
+  padding-bottom: 0.25em;
+}
+.cal-row {
+  display: flex;
+  gap: 0.6em;
+  margin: 0.18em 0;
+  line-height: 1.4;
+}
+.cal-label {
+  flex: 0 0 4.5em;
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+  color: var(--ink-muted);
+  font-size: 0.88em;
+  padding-top: 0.1em;
+}
+.cal-val { flex: 1; min-width: 0; }
+.cal-notes .cal-val { font-style: italic; color: var(--ink-soft); }
+
+.calendar-empty, .calendar-error { color: var(--ink-muted); }
+
 /* ---------- Folder index ---------- */
 
 .folder-children {
