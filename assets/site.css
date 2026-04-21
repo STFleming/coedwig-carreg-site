@@ -571,49 +571,96 @@ aside.statblock {
   .npc-layout-img { grid-column: 1; grid-row: auto; }
 }
 
-/* ---------- Calendar view ---------- */
+/* ---------- Calendar month grid ---------- */
 
-.calendar-view {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 1em;
+.calendar-month {
   margin: 1.2em 0;
 }
-.cal-day {
-  background: var(--paper-dim);
-  border-top: 3px double var(--ink);
-  border-bottom: 3px double var(--ink);
-  padding: 0.7em 0.9em;
-  font-size: 0.95rem;
+.cal-month-title {
+  font-family: "IM Fell English SC", Georgia, serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+  color: var(--rule-dark);
+  border-bottom: 2px double var(--rule);
+  padding-bottom: 0.2em;
+  margin-bottom: 0.6em;
+  text-align: center;
 }
-.cal-date {
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  background: var(--ink);
+  border: 2px solid var(--ink);
+}
+.cal-weekday {
+  background: var(--paper-dim);
   font-family: "IM Fell English SC", Georgia, serif;
   font-variant: small-caps;
-  font-size: 1.1rem;
-  color: var(--rule-dark);
   letter-spacing: 0.04em;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 0.4em;
-  padding-bottom: 0.25em;
+  text-align: center;
+  padding: 0.4em 0.3em;
+  font-size: 0.92rem;
+  color: var(--ink);
 }
-.cal-row {
+.cal-cell {
+  background: var(--paper);
+  padding: 0.45em 0.55em;
+  min-height: 7.5em;
+  position: relative;
+  font-size: 0.88rem;
+  line-height: 1.35;
+  overflow: hidden;
+}
+.cal-cell-blank { background: var(--paper-dim); }
+.cal-cell-head {
   display: flex;
-  gap: 0.6em;
-  margin: 0.18em 0;
-  line-height: 1.4;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px dotted var(--border);
+  padding-bottom: 0.15em;
+  margin-bottom: 0.3em;
 }
-.cal-label {
-  flex: 0 0 4.5em;
+.cal-cell-date {
+  font-family: "IM Fell English", Georgia, serif;
+  font-size: 1.2em;
+  color: var(--ink);
+  font-weight: bold;
+}
+.cal-cell-weekday {
+  font-variant: small-caps;
+  letter-spacing: 0.03em;
+  color: var(--ink-muted);
+  font-size: 0.85em;
+}
+.cal-has-entry { background: #fbf5e2; }
+.cal-cell-weather {
+  color: var(--ink-soft);
+  font-style: italic;
+  margin-bottom: 0.2em;
+}
+.cal-cell-events,
+.cal-cell-feasts,
+.cal-cell-sessions,
+.cal-cell-notes { margin: 0.15em 0; }
+.cal-cell-events { color: var(--rule-dark); font-weight: bold; }
+.cal-tag {
   font-variant: small-caps;
   letter-spacing: 0.04em;
   color: var(--ink-muted);
-  font-size: 0.88em;
-  padding-top: 0.1em;
+  font-size: 0.82em;
+  margin-right: 0.3em;
 }
-.cal-val { flex: 1; min-width: 0; }
-.cal-notes .cal-val { font-style: italic; color: var(--ink-soft); }
+.cal-cell-notes { font-style: italic; color: var(--ink-soft); }
 
-.calendar-empty, .calendar-error { color: var(--ink-muted); }
+.calendar-error { color: var(--rule-dark); background: var(--paper-dim); padding: 0.5em; }
+
+@media (max-width: 720px) {
+  .cal-grid { grid-template-columns: repeat(1, 1fr); }
+  .cal-weekday { display: none; }
+  .cal-cell { min-height: 0; padding: 0.6em 0.8em; }
+  .cal-cell-blank { display: none; }
+}
 
 /* ---------- Folder index ---------- */
 
