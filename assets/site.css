@@ -671,12 +671,28 @@ aside.statblock {
 }
 .cal-cell-moon {
   position: absolute;
-  bottom: 0.25em;
+  bottom: 0.3em;
   right: 0.4em;
   line-height: 1;
   opacity: 0.85;
+  display: flex;
+  align-items: baseline;
+  gap: 0.3em;
+}
+.cal-cell-moon-major {
+  left: 0.4em;
+  right: 0.4em;
+  justify-content: center;
+  opacity: 1;
 }
 .cal-moon-glyph { font-size: 1.1em; }
+.cal-moon-label {
+  font-family: "IM Fell English SC", Georgia, serif;
+  font-variant: small-caps;
+  letter-spacing: 0.05em;
+  font-size: 0.78em;
+  color: var(--ink-muted);
+}
 .cal-cell { position: relative; }
 .cal-cell-events,
 .cal-cell-feasts,
