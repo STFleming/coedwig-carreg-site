@@ -643,11 +643,8 @@ aside.statblock {
   position: relative;
   z-index: 1;
 }
-.cal-today::after {
-  content: "Today";
-  position: absolute;
-  top: 0.3em;
-  right: 0.3em;
+.cal-today .cal-cell-date { color: var(--rule-dark); font-weight: bold; }
+.cal-today-badge {
   font-family: "IM Fell English SC", Georgia, serif;
   font-variant: small-caps;
   font-size: 0.68rem;
@@ -656,9 +653,10 @@ aside.statblock {
   background: var(--paper);
   border: 1px solid var(--rule);
   padding: 1px 5px;
-  pointer-events: none;
+  line-height: 1;
+  align-self: center;
+  white-space: nowrap;
 }
-.cal-today .cal-cell-date { color: var(--rule-dark); font-weight: bold; }
 .cal-cell-weather {
   color: var(--ink-soft);
   font-style: italic;
