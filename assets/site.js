@@ -246,9 +246,35 @@
     });
   }
 
+  function highlightCurrentNav() {
+    var here = window.location.pathname.replace(/\/$/, "/index.html");
+    if (!/\.html$/.test(here) && here.charAt(here.length - 1) !== "/") here += "/index.html";
+    var links = document.querySelectorAll(".sidebar-nav a[href]");
+    var match = null;
+    for (var i = 0; i < links.length; i++) {
+      try {
+        var p = new URL(links[i].href, window.location.href).pathname;
+        if (p === here) { match = links[i]; break; }
+      } catch (e) { /* ignore */ }
+    }
+    if (!match) return;
+    match.classList.add("current");
+    // Open every <details> ancestor so the current entry is visible.
+    var el = match.parentElement;
+    while (el && el !== document.body) {
+      if (el.tagName === "DETAILS") el.open = true;
+      el = el.parentElement;
+    }
+    // Scroll into view if off-screen in the sidebar.
+    try {
+      match.scrollIntoView({ block: "nearest", inline: "nearest" });
+    } catch (e) { /* ignore */ }
+  }
+
   function onReady() {
     initAllMaps();
     attachHoverHandlers();
+    highlightCurrentNav();
   }
 
   if (document.readyState === "loading") {

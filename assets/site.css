@@ -124,6 +124,14 @@ a:hover, a:focus { text-decoration: underline; }
   padding: 1px 0;
 }
 .tree-item > a:hover { color: var(--rule); }
+.tree-item > a.current {
+  color: var(--rule-dark);
+  font-weight: bold;
+  background: var(--paper);
+  border-left: 3px solid var(--rule);
+  padding-left: 0.4em;
+  margin-left: -0.7em;
+}
 .tree-item > a.pdf-link::before {
   content: "\1F4D6"; /* 📖 */
   font-size: 0.85em;
